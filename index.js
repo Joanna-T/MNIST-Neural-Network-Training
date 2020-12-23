@@ -29,6 +29,12 @@ function parse_data(data) {
   console.log(image_values[0][1]);
   console.log(image_values.length);
   training_image_values = image_values;
+    if (trained) {
+    test_data(test_image_values);
+  } else {
+    train_data(train_image_values);
+    load_test_data();
+  }
 }
 
 function train_data(image_array) {
