@@ -28,10 +28,11 @@ function parse_data(data) {
   }
   console.log(image_values[0][1]);
   console.log(image_values.length);
-  training_image_values = image_values;
     if (trained) {
+    test_image_values = image_values
     test_data(test_image_values);
   } else {
+    training_image_values = image_values
     train_data(train_image_values);
     load_test_data();
   }
@@ -53,6 +54,11 @@ function train_data(image_array) {
     //convert input to matrix form
     let image_pixel_values = [];
     for (let j = 1; j < image_array[i].length; j++) {
+      if (image_array[i][j] == 0) {
+        image_array[i][j] = 0;
+      } else {
+        image_array[i][j] = image_array[i][j] / 255;
+      }
       image_pixel_values.push([image_array[i][j]]);
     }
     let image_pixel_values_m = new Matrix(image_pixel_values.length, 1);
@@ -84,6 +90,11 @@ function test_data(image_array) {
 
     let selected_image_arr = [];
     for (let j = 1; j < selected_image.length; j++) {
+      if (selected_image[j] == 0) {
+        selected_image[j] = 0;
+      } else {
+        selected_image[j] = selected_image[j] / 255;
+      }
       selected_image_arr.push([selected_image[j]]);
     }
     //debugger;
